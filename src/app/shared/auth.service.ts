@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Router } from '@angular/router';
 import { tap, delay } from 'rxjs/operators';
 
 @Injectable({
@@ -9,7 +8,7 @@ import { tap, delay } from 'rxjs/operators';
 export class AuthService {
   isLoggedIn = false;
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   login(): Observable<boolean> {
     return of(true).pipe(
@@ -20,6 +19,5 @@ export class AuthService {
 
   logout() {
     this.isLoggedIn = false;
-    this.router.navigate(['/login']);
   }
 }

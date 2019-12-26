@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-movies',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent implements OnInit {
+  constructor(private router: Router, private authService: AuthService) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
-
 }
