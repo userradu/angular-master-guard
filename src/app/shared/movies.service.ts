@@ -38,4 +38,21 @@ export class MoviesService {
     const movies = this.moviesSubject.value.filter(movie => movie.id !== id);
     this.moviesSubject.next(movies);
   }
+
+  getMovieById(id: number): Movie {
+    return this.moviesSubject.value.find(movie => movie.id === id);
+  }
+
+  updateMovie(movie: Movie) {
+    const movies = this.moviesSubject.value;
+
+    for (let i = 0; i < movies.length; i++) {
+      if (movies[i].id === movie.id) {
+        movies[i] = movie;
+        break;
+      }
+    }
+
+    this.moviesSubject.next(movies);
+  }
 }

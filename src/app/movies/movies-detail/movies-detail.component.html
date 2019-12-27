@@ -1,3 +1,18 @@
-<p>
-  movies-detail works!
-</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input type="text" name="title" formControlName="title" placeholder="Title" />
+
+  <br />
+
+  <textarea
+    name="description"
+    formControlName="description"
+    cols="30"
+    rows="10"
+    placeholder="Description"
+  >
+  </textarea>
+
+  <br />
+
+  <button type="submit">Update</button>
+</form>

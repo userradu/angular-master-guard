@@ -10,7 +10,7 @@
     <td>{{ movie.title }}</td>
     <td>{{ movie.description }}</td>
     <td>
-      <button>Edit</button>
+      <button routerLink="/movies/{{ movie.id }}">Edit</button>
       <button class="delete-btn" (click)="deleteMovie(movie.id)">Delete</button>
     </td>
   </tr>
