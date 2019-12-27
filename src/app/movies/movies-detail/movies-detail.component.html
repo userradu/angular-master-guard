@@ -1,4 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input type="hidden" name="id" formControlName="id" />
+
   <input type="text" name="title" formControlName="title" placeholder="Title" />
 
   <br />

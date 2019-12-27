@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MoviesService } from 'src/app/shared/movies.service';
+import { MoviesService, Movie } from 'src/app/shared/movies.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./movies-detail.component.css']
 })
 export class MoviesDetailComponent implements OnInit {
-  id: number;
+  movie: Movie;
   form: FormGroup;
 
   constructor(
@@ -20,17 +20,19 @@ export class MoviesDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
-    const movie = this.moviesService.getMovieById(this.id);
+    this.route.data.subscribe((data: { movie: Movie }) => {
+      this.movie = data.movie;
 
-    this.form = this.fb.group({
-      title: [movie.title],
-      description: [movie.description]
+      this.form = this.fb.group({
+        id: [this.movie.id],
+        title: [this.movie.title],
+        description: [this.movie.description]
+      });
     });
   }
 
   onSubmit() {
-    this.moviesService.updateMovie({ id: this.id, ...this.form.value });
+    this.moviesService.updateMovie(this.form.value);
     this.router.navigate(['/movies']);
   }
 }
