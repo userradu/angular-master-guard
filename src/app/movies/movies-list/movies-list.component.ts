@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService, Movie } from 'src/app/shared/movies.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-movies-list',
@@ -7,11 +8,13 @@ import { MoviesService, Movie } from 'src/app/shared/movies.service';
   styleUrls: ['./movies-list.component.css']
 })
 export class MoviesListComponent implements OnInit {
-  movies: Movie[];
+  movies$: Observable<Movie[]> = this.moviesService.movies;
 
   constructor(private moviesService: MoviesService) {}
 
-  ngOnInit() {
-    this.movies = this.moviesService.movies;
+  ngOnInit() {}
+
+  deleteMovie(id: number) {
+    this.moviesService.deleteMovie(id);
   }
 }

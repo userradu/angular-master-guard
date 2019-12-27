@@ -1,15 +1,17 @@
-<table *ngIf="movies.length">
+<table *ngIf="(movies$ | async)?.length">
   <tr>
+    <th>Id</th>
     <th>Title</th>
     <th>Description</th>
     <th>Actions</th>
   </tr>
-  <tr *ngFor="let movie of movies">
+  <tr *ngFor="let movie of movies$ | async">
+    <td>{{ movie.id }}</td>
     <td>{{ movie.title }}</td>
     <td>{{ movie.description }}</td>
     <td>
       <button>Edit</button>
-      <button class="delete-btn">Delete</button>
+      <button class="delete-btn" (click)="deleteMovie(movie.id)">Delete</button>
     </td>
   </tr>
 </table>
