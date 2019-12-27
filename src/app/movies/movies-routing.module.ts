@@ -6,6 +6,7 @@ import { MoviesDetailComponent } from './movies-detail/movies-detail.component';
 import { MoviesCreateComponent } from './movies-create/movies-create.component';
 import { DummyLoadChildrenGuard } from '../shared/dummy-load-children.guard';
 import { MovieDetailResolverService } from './movies-detail/movie-detail-resolver.service';
+import { CanDeactivateGuard } from '../shared/can-deactivate.guard';
 
 const routes: Routes = [
   {
@@ -19,14 +20,16 @@ const routes: Routes = [
       },
       {
         path: 'new',
-        component: MoviesCreateComponent
+        component: MoviesCreateComponent,
+        canDeactivate: [CanDeactivateGuard]
       },
       {
         path: ':id',
         component: MoviesDetailComponent,
         resolve: {
           movie: MovieDetailResolverService
-        }
+        },
+        canDeactivate: [CanDeactivateGuard]
       }
     ]
   }

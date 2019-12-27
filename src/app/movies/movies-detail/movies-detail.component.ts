@@ -2,15 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { MoviesService, Movie } from 'src/app/shared/movies.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { CanComponentDeactivate } from 'src/app/shared/can-deactivate.guard';
 
 @Component({
   selector: 'app-movies-detail',
   templateUrl: './movies-detail.component.html',
   styleUrls: ['./movies-detail.component.css']
 })
-export class MoviesDetailComponent implements OnInit {
+export class MoviesDetailComponent implements OnInit, CanComponentDeactivate {
   movie: Movie;
   form: FormGroup;
+  formSubmitted = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,8 +33,23 @@ export class MoviesDetailComponent implements OnInit {
     });
   }
 
+  canDeactivate(): boolean {
+    if (this.form.dirty && !this.formSubmitted) {
+      return window.confirm(
+        'You have unsaved changes! Are you sure you want to leave the page?'
+      );
+    }
+
+    return true;
+  }
+
   onSubmit() {
     this.moviesService.updateMovie(this.form.value);
+    this.formSubmitted = true;
+    this.router.navigate(['/movies']);
+  }
+
+  cancel() {
     this.router.navigate(['/movies']);
   }
 }
