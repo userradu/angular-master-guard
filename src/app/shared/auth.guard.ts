@@ -19,11 +19,15 @@ export class AuthGuard implements CanActivate, CanLoad {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    return this.checkLogin();
+    const response = this.checkLogin();
+    console.log('can activate auth guard return value', response);
+    return response;
   }
 
   canLoad(route: Route): boolean {
-    return this.checkLogin();
+    const response = this.checkLogin();
+    console.log('can load auth guard return value', response);
+    return response;
   }
 
   checkLogin() {

@@ -28,3 +28,11 @@ The site should have the following:
 The guards will need to be sync (return boolean) and async (return observable). 
 
 - a master guard to run a list of guards in order
+
+## Notes
+
+### CanActivateChild
+
+If the parent component is not accessible (canActivate, canLoad), then the child component will not be accessible.
+
+If the parent component is accessible (canActivate, canLoad), but the child component is not accessible (canActivateChild), then the parent component will not be loaded neither. This behavior is the same even if an async guard is used for the parent component and a sync guard for the child component. 
