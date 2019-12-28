@@ -7,7 +7,7 @@ This project was created in order to learn more about Angular guards.
 ### CanLoad
 
 **This type of guard will not be executed once the module is loaded.**
-Consider a situation where the user logs in, the module is loaded, logs out, logs in again (lets assume that he doesn't have the rights to see a certain page, but hte module is loaded).
+Consider a situation where the user logs in, the module is loaded, logs out, logs in again (lets assume that he doesn't have the rights to see a certain page, but the module is loaded).
 
 ### CanActivateChild
 
