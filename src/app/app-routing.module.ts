@@ -19,9 +19,9 @@ const routes: Routes = [
   {
     path: 'movies',
     loadChildren: './movies/movies.module#MoviesModule',
-    // canLoad: [AuthGuard]
+    canActivate: [AuthGuard]
     // canActivate: [Dummy1Guard, Dummy2Guard]
-    canLoad: [Dummy1Guard, Dummy2Guard, Dummy3Guard]
+    // canLoad: [Dummy1Guard, Dummy2Guard, Dummy3Guard]
   },
   {
     path: 'dummy1',
